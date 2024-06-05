@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import bigimg from '../../../public/img/bigflower.svg';
-import littleimg from '../../../public/img/littleflower.svg';
-import Hero2 from '../components/Hero2';
-import saleimg from '../../../public/img/Sale.svg';
-import Slider from '@mui/material/Slider'; // Range slider komponentini import qilamiz
-import Hero3 from '../components/Hero3';
-import Hero4 from '../components/Hero4';
-
+import React, { useState, useEffect } from "react";
+import bigimg from "../../../public/img/bigflower.svg";
+import littleimg from "../../../public/img/littleflower.svg";
+import Hero2 from "../components/Hero2";
+import saleimg from "../../../public/img/Sale.svg";
+import Slider from "@mui/material/Slider"; // Range slider komponentini import qilamiz
+import Hero3 from "../components/Hero3";
+import Hero4 from "../components/Hero4";
+import Footer from "../components/Footer";
 
 const Homepage = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -18,19 +18,22 @@ const Homepage = () => {
     {
       title: "LET’S MAKE A BETTER ",
       title2: "PLANET",
-      description: "We are an online plant shop offering a wide range of cheap and trendy plants. Use our plants to create an unique Urban Jungle. Order your favorite plants!",
+      description:
+        "We are an online plant shop offering a wide range of cheap and trendy plants. Use our plants to create an unique Urban Jungle. Order your favorite plants!",
       button: "SHOP NOW",
     },
     {
       title: "DISCOVER OUR NEW ",
       title2: "COLLECTION",
-      description: "Explore our latest collection of plants, curated just for you. Find the perfect addition to your green space.",
+      description:
+        "Explore our latest collection of plants, curated just for you. Find the perfect addition to your green space.",
       button: "EXPLORE NOW",
     },
     {
       title: "JOIN OUR PLANT ",
       title2: "COMMUNITY",
-      description: "Connect with other plant enthusiasts, share tips, and grow your own urban jungle together.",
+      description:
+        "Connect with other plant enthusiasts, share tips, and grow your own urban jungle together.",
       button: "JOIN US",
     },
   ];
@@ -78,25 +81,28 @@ const Homepage = () => {
   };
 
   return (
-    <div className="w-[100%] h-[500px] bg-gray-100 py-8 mt-4">
-      <div className="flex mt-2">
-        <div className="leftsection mx-16 mt-16">
+    <div className="w-full bg-gray-100 py-8 mt-4">
+      <div className="flex flex-col lg:flex-row mt-2">
+        <div className="leftsection mx-8 lg:mx-16 mt-8 lg:mt-16 text-center lg:text-left">
           <p className="font-sans">WELCOME TO GREENSHOP</p>
-          <h1 className="text-7xl w-[70%] font-bold">
-            {pages[currentPage].title} <span className="text-green-600">{pages[currentPage].title2}</span>
+          <h1 className="text-3xl lg:text-7xl font-bold">
+            {pages[currentPage].title}{" "}
+            <span className="text-green-600">{pages[currentPage].title2}</span>
           </h1>
-          <p className="w-[60%] text-sm mt-4">{pages[currentPage].description}</p>
+          <p className="w-full lg:w-3/5 text-sm mt-4 mx-auto lg:mx-0">
+            {pages[currentPage].description}
+          </p>
           <button className="text-white bg-green-600 px-5 py-2 rounded-lg mt-4">
             {pages[currentPage].button}
           </button>
         </div>
-        <div className="rightsection flex items-baseline relative">
+        <div className="rightsection flex items-center justify-center relative mt-8 lg:mt-0">
           <img
             src={littleimg}
             alt=""
-            className="w-[50%] absolute left-[-100px] top-44"
+            className="w-1/3 lg:w-1/4 absolute left-[-50px] lg:left-[-100px] top-32 lg:top-44"
           />
-          <img src={bigimg} alt="" className="w-[80%]" />
+          <img src={bigimg} alt="" className="w-2/3 lg:w-4/5" />
         </div>
       </div>
       <div className="flex justify-center mt-8">
@@ -104,22 +110,24 @@ const Homepage = () => {
           <button
             key={index}
             className={`mx-2 w-4 h-4 rounded-full ${
-              currentPage === index ? 'bg-green-600' : 'bg-gray-400 w-3 h-3'
+              currentPage === index ? "bg-green-600" : "bg-gray-400"
             }`}
             onClick={() => handlePageChange(index)}
           />
         ))}
       </div>
-      <div className="hero2 w-[100%] h-[240%] container-sm gap-4 px-4 mt-24 mx-auto flex justify-between">
-        <div className="categories w-[18%] py-4 px-8 rounded bg-gray-100">
+      <div className="hero2 w-full container mx-auto flex flex-col lg:flex-row justify-between gap-4 px-4 mt-24">
+        <div className="categories w-full lg:w-1/4 py-4 px-4 lg:px-8 rounded bg-gray-100">
           <h3 className="font-semibold">Categories</h3>
           <div className="plants mt-4">
-            <ul className="flex flex-col gap-4 ml-2">
+            <ul className="flex flex-col gap-2 ml-2">
               {categories.map((category, index) => (
                 <li
                   key={index}
                   className={`flex justify-between cursor-pointer ${
-                    activeCategory === index ? 'text-green-600' : ''
+                    activeCategory === index
+                      ? "text-green-600"
+                      : "hover:text-green-600"
                   }`}
                   onClick={() => handleCategoryClick(index)}
                 >
@@ -127,30 +135,34 @@ const Homepage = () => {
                 </li>
               ))}
             </ul>
-             <div className="range-slider mt-8 mx-4">
-              <h2 className='font-bold ml-[-20px]'>Prise Range</h2>
-        {/* Range slider */}
-        <Slider
-  value={sliderValue}
-  onChange={handleSliderChange}
-  valueLabelDisplay="auto"
-  aria-labelledby="range-slider"
-  min={39}
-  max={1230}
-  className='slider-color'
-/>
-
-        <p>Price: <span className='text-green-600 font-bold'>$39-$1230</span></p>
-      </div>
+            <div className="range-slider mt-8 mx-2 lg:mx-4">
+              <h2 className="font-bold">Price Range</h2>
+              <Slider
+                value={sliderValue}
+                onChange={handleSliderChange}
+                valueLabelDisplay="auto"
+                aria-labelledby="range-slider"
+                min={39}
+                max={1230}
+                className="slider-color"
+              />
+              <p className="mt-2">
+                Price:{" "}
+                <span className="text-green-600 font-bold">$39-$1230</span>
+              </p>
+              <button className="px-6 py-2 text-white bg-green-600 rounded-lg mt-2">Filter</button>
+            </div>
           </div>
           <div className="plants mt-4">
-            <h3 className="font-semibold ml-[-2]">Size</h3>
-            <ul className="flex flex-col gap-4 ml-2 mt-4">
+            <h3 className="font-semibold">Size</h3>
+            <ul className="flex flex-col gap-2 ml-2 mt-4">
               {sizes.map((size, index) => (
                 <li
                   key={index}
                   className={`flex justify-between cursor-pointer ${
-                    activeSize === index ? 'text-green-600' : ''
+                    activeSize === index
+                      ? "text-green-600"
+                      : "hover:text-green-600"
                   }`}
                   onClick={() => handleSizeClick(index)}
                 >
@@ -161,13 +173,14 @@ const Homepage = () => {
           </div>
           <img src={saleimg} alt="Sale" className="mt-4 w-full" />
         </div>
-        <Hero2 />
+        <div className="w-full lg:w-3/4">
+          <Hero2 />
+        </div>
       </div>
-        <Hero3/>
-        <Hero4/>
-
-     
-    </div>  
+      <Hero3 />
+      <Hero4 />
+      <Footer />
+    </div>
   );
 };
 
